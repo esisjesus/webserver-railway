@@ -1,9 +1,18 @@
 const express = require('express')
+const hbs = require('hbs')
+
 const app = express()
 
 app.use(express.static('public'))
-app.use(express.static('files'))
+app.set('view engine', 'hbs')
+hbs.registerPartials(__dirname + '/views/partials')
 
+app.get('/', (req, res)=> {
+    res.render('home', {
+        name: "Jesus",
+        title: "Merwebo"
+    })
+})
 app.get('/elements', (req, res) => {
     res.sendFile(__dirname + '/public/elements.html')
 })
